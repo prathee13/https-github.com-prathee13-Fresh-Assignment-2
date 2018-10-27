@@ -29,6 +29,12 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Navigation
     
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIBarButtonItem, button === saveButton else {

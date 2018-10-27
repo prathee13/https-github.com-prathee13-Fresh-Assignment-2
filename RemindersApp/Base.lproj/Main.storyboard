@@ -187,7 +187,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="DEy-lp-QDW">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6ER-BR-8xe"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6ER-BR-8xe">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="7ke-QN-4gH"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="gxy-tR-Gw1">
                             <connections>
                                 <segue destination="qSK-iG-vr9" kind="unwind" unwindAction="unwindToTaskListWithSender:" id="3pm-tI-xaF"/>
