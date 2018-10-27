@@ -66,7 +66,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="TASKS TO-DO" id="SAr-c7-Eda">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="S9t-WF-ss6"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="S9t-WF-ss6">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" id="KuL-YE-rgH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLE-Z3-jTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
