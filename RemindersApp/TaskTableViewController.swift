@@ -112,11 +112,11 @@ self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
             fatalError("Unable to instantiate meal1")
         }
         
-        guard let task2 = Task(title: "Pay Bills", photo: photo2, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm" ) as? Task else {
+        guard let task2 = Task(title: "Birthday", photo: photo2, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm" ) as? Task else {
             fatalError("Unable to instantiate meal1")
         }
         
-        guard let task3 = Task(title: "Pay Bills", photo: photo3, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm"  ) as? Task else {
+        guard let task3 = Task(title: "Call Electrician", photo: photo3, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm"  ) as? Task else {
             fatalError("Unable to instantiate meal1")
         }
         

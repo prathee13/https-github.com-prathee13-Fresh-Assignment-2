@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  TaskViewController.swift
 //  RemindersApp
 //
 //  Created by Pratheeksha on 2018-10-19.
-//  Copyright © 2018 Hemanth Kasoju. All rights reserved.
+//  Copyright © 2018. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var reminderNameText: UITextField!
     @IBOutlet weak var currentDateAndTime: UITextField!
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        reminderName.text = textField.text
+        
     }
     func printCurrentDateAndTime(){
         
@@ -86,14 +86,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
     func setDateAndTime(){
         var datePicker = UIDatePicker();
         datePicker.datePickerMode = .dateAndTime;
-        datePicker.addTarget(self, action: #selector(ViewController.dateChanged(datePicker:)), for: .valueChanged)
+        datePicker.addTarget(self, action: #selector(TaskViewController.dateChanged(datePicker:)), for: .valueChanged)
         dueDateAndTime.inputView = datePicker;
         
     }
     
     @objc func  dateChanged(datePicker: UIDatePicker) {
         let formatter = DateFormatter();
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.viewTapped(gestureRecognizer:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TaskViewController.viewTapped(gestureRecognizer:)))
         view.addGestureRecognizer(tapGesture);
         formatter.dateStyle = .long;
         formatter.timeStyle = .medium;
