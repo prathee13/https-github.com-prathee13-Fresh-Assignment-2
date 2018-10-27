@@ -89,6 +89,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         printCurrentDateAndTime();
         setDateAndTime();
         showPriority();
+        updateSaveButtonState()
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -98,6 +100,20 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSaveButtonState()
+        navigationItem.title = textField.text
+    }
+    
+    private func textFieldShouldBeginEditing(_ textField: UITextField) {
+        saveButton.isEnabled = false
+    }
+    
+    
+    private func updateSaveButtonState()
+    {
+        // Disable the Save button if the text field is empty.
+        let text = reminderNameText.text ?? ""
+        saveButton.isEnabled = !text.isEmpty
         
     }
     func printCurrentDateAndTime(){
