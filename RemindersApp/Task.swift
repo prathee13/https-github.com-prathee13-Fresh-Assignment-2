@@ -22,6 +22,7 @@ class Task {
     //mark: initalization
     
     init(title: String, photo: UIImage?, currentDate: String, dueDate: String, priority: String, notes: String) {
+    
         self.currentDate = currentDate
         self.dueDate = dueDate
         self.notes = notes

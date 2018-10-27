@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		97462FB12183F1F900112232 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97462FB02183F1F900112232 /* Task.swift */; };
-		97462FB32183F4EF00112232 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97462FB22183F4EF00112232 /* TaskTableViewCell.swift */; };
+		97462FB52184062F00112232 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97462FB42184062F00112232 /* TaskTableViewCell.swift */; };
+		97462FB72184072500112232 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97462FB62184072500112232 /* TaskTableViewController.swift */; };
 		FE1B1E8E217E68BD007755FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1B1E8D217E68BD007755FE /* AppDelegate.swift */; };
 		FE1B1E90217E68BD007755FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1B1E8F217E68BD007755FE /* ViewController.swift */; };
 		FE1B1E93217E68BD007755FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1B1E91217E68BD007755FE /* Main.storyboard */; };
@@ -37,7 +38,8 @@
 
 /* Begin PBXFileReference section */
 		97462FB02183F1F900112232 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		97462FB22183F4EF00112232 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		97462FB42184062F00112232 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		97462FB62184072500112232 /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		FE1B1E8A217E68BD007755FE /* RemindersApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemindersApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE1B1E8D217E68BD007755FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE1B1E8F217E68BD007755FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +107,8 @@
 				FE1B1E8F217E68BD007755FE /* ViewController.swift */,
 				97462FB02183F1F900112232 /* Task.swift */,
 				FE1B1E91217E68BD007755FE /* Main.storyboard */,
-				97462FB22183F4EF00112232 /* TaskTableViewCell.swift */,
+				97462FB62184072500112232 /* TaskTableViewController.swift */,
+				97462FB42184062F00112232 /* TaskTableViewCell.swift */,
 				FE1B1E94217E68C1007755FE /* Assets.xcassets */,
 				FE1B1E96217E68C1007755FE /* LaunchScreen.storyboard */,
 				FE1B1E99217E68C1007755FE /* Info.plist */,
@@ -262,7 +265,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97462FB32183F4EF00112232 /* TaskTableViewCell.swift in Sources */,
+				97462FB72184072500112232 /* TaskTableViewController.swift in Sources */,
+				97462FB52184062F00112232 /* TaskTableViewCell.swift in Sources */,
 				FE1B1E90217E68BD007755FE /* ViewController.swift in Sources */,
 				97462FB12183F1F900112232 /* Task.swift in Sources */,
 				FE1B1E8E217E68BD007755FE /* AppDelegate.swift in Sources */,
