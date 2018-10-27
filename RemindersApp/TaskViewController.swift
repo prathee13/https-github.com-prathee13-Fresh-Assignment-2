@@ -29,6 +29,8 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Navigation
     
+    
+    
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -95,7 +97,20 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         printCurrentDateAndTime();
         setDateAndTime();
         showPriority();
-        updateSaveButtonState()
+       
+        
+        // Set up views if editing an existing Meal.
+        if let task = task {
+            reminderNameText.text = task.title
+            navigationItem.title = task.title
+            currentDateAndTime.text = task.currentDate
+            dueDateAndTime.text = task.dueDate
+            desc.text = task.notes
+            priorityTextField.text = task.priority
+            reminderImage.image = task.photo
+        }
+        
+         updateSaveButtonState()
         
     }
     

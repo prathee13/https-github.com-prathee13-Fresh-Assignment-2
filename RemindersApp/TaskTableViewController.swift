@@ -6,6 +6,7 @@
 //  Copyright © 2018 . All rights reserved.
 //
 
+import os.log
 import UIKit
 
 class TaskTableViewController: UITableViewController {
@@ -91,15 +92,40 @@ self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+            
+        case "AddItem":
+            os_log("Adding a new meal.", log: OSLog.default, type: .debug)
+            
+        case "showDetail":
+            guard let taskDetailViewController = segue.destination as? TaskViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedTaskCell = sender as? TaskTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedTaskCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedTask = tasks[indexPath.row]
+            taskDetailViewController.task = selectedTask
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+            
+        }
     }
-    */
+ 
     
     //MARK: Actions
     @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
