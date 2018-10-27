@@ -1,15 +1,17 @@
 //
 //  TaskViewController.swift
-//  RemindersApp
+//  
 //
 //  Created by Pratheeksha on 2018-10-19.
 //  Copyright © 2018. All rights reserved.
 //
 
+import os.log
 import UIKit
 
 class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var desc: UITextField!
     @IBOutlet weak var reminderNameText: UITextField!
     @IBOutlet weak var currentDateAndTime: UITextField!
     @IBOutlet weak var reminderName: UILabel!
@@ -17,10 +19,35 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var priorityTextField: UITextField!
     @IBOutlet weak var reminderImage: UIImageView!
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     private var datePicker: UIDatePicker?
     var priority = ["High", "Medium", "Low"];
     var picker = UIPickerView();
     
+    var task: Task?
+    
+    //MARK: Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Configure the destination view controller only when the save button is pressed.
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+        
+        let title = reminderNameText.text ?? ""
+        let photo = reminderImage.image
+        let currentDate = currentDateAndTime.text ?? ""
+        let dueDate = dueDateAndTime.text ?? ""
+        let priority = priorityTextField.text ?? ""
+        let notes = desc.text ?? ""
+        
+        task = Task(title: title, photo: photo, currentDate: currentDate, dueDate: dueDate, priority: priority, notes: notes)
+    }
+    
+    //MARK: Actions
     @IBAction func chooseImage(_ sender: Any) {
         let imagePickerController = UIImagePickerController();
         imagePickerController.delegate = self;
@@ -84,7 +111,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     
     func setDateAndTime(){
-        var datePicker = UIDatePicker();
+        let datePicker = UIDatePicker();
         datePicker.datePickerMode = .dateAndTime;
         datePicker.addTarget(self, action: #selector(TaskViewController.dateChanged(datePicker:)), for: .valueChanged)
         dueDateAndTime.inputView = datePicker;

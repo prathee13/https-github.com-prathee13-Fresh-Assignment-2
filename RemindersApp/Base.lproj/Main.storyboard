@@ -172,7 +172,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Additional Information" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RZ9-Fv-8fp">
-                                <rect key="frame" x="10" y="469" width="349" height="30"/>
+                                <rect key="frame" x="10" y="467" width="349" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -188,18 +188,25 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="DEy-lp-QDW">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6ER-BR-8xe"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gxy-tR-Gw1"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gxy-tR-Gw1">
+                            <connections>
+                                <segue destination="qSK-iG-vr9" kind="unwind" unwindAction="unwindToTaskListWithSender:" id="3pm-tI-xaF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="currentDateAndTime" destination="yvN-tL-v5r" id="dBC-ro-hA2"/>
+                        <outlet property="desc" destination="RZ9-Fv-8fp" id="fLB-4j-Hxt"/>
                         <outlet property="dueDateAndTime" destination="Cgy-ih-QMp" id="dc9-EB-Vry"/>
                         <outlet property="priorityTextField" destination="YJN-3c-NOK" id="thF-99-fKH"/>
                         <outlet property="reminderImage" destination="sM8-Zc-8UU" id="gGm-IT-MzQ"/>
                         <outlet property="reminderName" destination="IEs-bY-qgR" id="5Qg-c2-t7J"/>
                         <outlet property="reminderNameText" destination="5CL-Bw-82i" id="6g2-eq-t7e"/>
+                        <outlet property="saveButton" destination="gxy-tR-Gw1" id="BWQ-7Z-DZU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="qSK-iG-vr9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-440.80000000000001" y="43.628185907046479"/>
         </scene>

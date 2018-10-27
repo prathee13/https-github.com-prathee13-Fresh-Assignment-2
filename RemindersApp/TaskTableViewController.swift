@@ -101,6 +101,21 @@ self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     */
     
+    //MARK: Actions
+    @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
+        
+        if let sourceViewController = sender.source as? TaskViewController, let task = sourceViewController.task {
+            
+            // Add a new meal.
+            let newIndexPath = IndexPath(row: tasks.count, section: 0)
+            
+            tasks.append(task)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
+        
+        
+    }
+    
     private func loadSampleTasks() {
         
         let photo1 = UIImage(named: "task1")
