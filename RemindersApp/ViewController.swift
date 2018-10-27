@@ -9,14 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    @IBOutlet weak var reminderNameText: UITextField!
     
+    @IBOutlet weak var reminderNameText: UITextField!
     @IBOutlet weak var currentDateAndTime: UITextField!
     @IBOutlet weak var reminderName: UILabel!
     @IBOutlet weak var dueDateAndTime: UITextField!
     @IBOutlet weak var priorityTextField: UITextField!
-    
-  
     @IBOutlet weak var reminderImage: UIImageView!
     
     private var datePicker: UIDatePicker?
@@ -136,7 +134,5 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
         view.endEditing(true);
 
     }
-    
-    
 }
 
