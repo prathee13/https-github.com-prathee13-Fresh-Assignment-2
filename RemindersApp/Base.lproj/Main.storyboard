@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Task Table View Controller-->
+        <!--TASKS TO-DO-->
         <scene sceneID="GDj-dO-AsW">
             <objects>
                 <tableViewController id="NMQ-EG-Hwc" customClass="TaskTableViewController" customModule="RemindersApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -65,7 +65,9 @@
                             <outlet property="delegate" destination="NMQ-EG-Hwc" id="RSg-X1-dA0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="SAr-c7-Eda"/>
+                    <navigationItem key="navigationItem" title="TASKS TO-DO" id="SAr-c7-Eda">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="S9t-WF-ss6"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLE-Z3-jTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
