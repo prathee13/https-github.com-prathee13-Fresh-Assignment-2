@@ -9,7 +9,7 @@
 import os.log
 import UIKit
 
-class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var desc: UITextField!
     @IBOutlet weak var reminderNameText: UITextField!
@@ -18,6 +18,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var dueDateAndTime: UITextField!
     @IBOutlet weak var priorityTextField: UITextField!
     @IBOutlet weak var reminderImage: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -91,26 +92,17 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         self.present(actionSheet, animated: true, completion: nil);
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage;
-        reminderImage.image = image;
-        
-        picker.dismiss(animated: true, completion: nil);
-    }
-    
-
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil);
     }
     override func viewDidLoad() {
         super.viewDidLoad();
         // Do any additional setup after loading the view, typically from a nib.
+        
         reminderNameText.delegate = self;
         printCurrentDateAndTime();
         setDateAndTime();
         showPriority();
-       
         
         // Set up views if editing an existing Meal.
         if let task = task {
@@ -123,9 +115,85 @@ class TaskViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             reminderImage.image = task.photo
         }
         
+        //Image Experimentation
+        scrollView.delegate = self
+        reminderImage.frame = CGRect(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+        reminderImage.image = UIImage(named: "Image")
+        reminderImage.isUserInteractionEnabled = true
+        
+        scrollView.addSubview(reminderImage)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.loadImage(recognizer:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        reminderImage.addGestureRecognizer(tapGestureRecognizer)
+        
          updateSaveButtonState()
         
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage;
+        reminderImage.image = image;
+        
+        
+        //chnages start here..
+        reminderImage.contentMode = UIView.ContentMode.center
+        reminderImage.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: image.size.width, height: image.size.height))
+        
+        scrollView.contentSize = image.size
+        
+        let scrollViewFrame = scrollView.frame
+        let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
+        let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
+        let minScale = min(scaleHeight, scaleWidth)
+        
+        scrollView.minimumZoomScale = minScale
+        scrollView.maximumZoomScale = 1
+        scrollView.zoomScale = minScale
+        
+      centerScrollViewContents()
+        
+        //normal
+        picker.dismiss(animated: true, completion: nil);
+    }
+    
+    
+    func centerScrollViewContents() {
+    let boundsSize = scrollView.bounds.size
+    var contentsFrame = reminderImage.frame
+        
+        if contentsFrame.size.width < boundsSize.width{
+            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2
+        }else{
+            contentsFrame.origin.x = 0
+        }
+        
+        if contentsFrame.size.height < boundsSize.height{
+            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2
+        }else{
+            contentsFrame.origin.y = 0
+        }
+        
+        reminderImage.frame = contentsFrame
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        centerScrollViewContents()
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return reminderImage
+    }
+    
+    @objc func loadImage(recognizer: UITapGestureRecognizer) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
