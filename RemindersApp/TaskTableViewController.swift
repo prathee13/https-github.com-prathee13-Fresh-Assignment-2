@@ -21,9 +21,14 @@ class TaskTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        if let savedTasks = loadTasks() {
+            tasks += savedTasks
+        }
+        else {
+            loadSampleTasks()
+        }
         
-        loadSampleTasks()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
     }
 
@@ -58,23 +63,21 @@ class TaskTableViewController: UITableViewController {
         return cell
     }
 
-
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
- 
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             tasks.remove(at: indexPath.row)
-
+            saveTasks()
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -149,6 +152,7 @@ class TaskTableViewController: UITableViewController {
             tasks.append(task)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
+            saveTasks()
       }
     }
     
@@ -158,16 +162,16 @@ class TaskTableViewController: UITableViewController {
         let photo2 = UIImage(named: "task2")
         let photo3 = UIImage(named: "task3")
         
-        guard let task1 = Task(title: "Pay Bills", photo: photo1, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm" ) as? Task
+        guard let task1 = Task(title: "Pay Bills", photo: photo1, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm" )
             else {
             fatalError("Unable to instantiate meal1")
         }
         
-        guard let task2 = Task(title: "Birthday", photo: photo2, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm" ) as? Task else {
+        guard let task2 = Task(title: "Birthday", photo: photo2, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm" ) else {
             fatalError("Unable to instantiate meal1")
         }
         
-        guard let task3 = Task(title: "Call Electrician", photo: photo3, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm"  ) as? Task else {
+        guard let task3 = Task(title: "Call Electrician", photo: photo3, currentDate: "String", dueDate: "String", priority: "High", notes: "mmm"  ) else {
             fatalError("Unable to instantiate meal1")
         }
         
@@ -175,4 +179,20 @@ class TaskTableViewController: UITableViewController {
         
 }
 
+    private func saveTasks() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tasks, toFile: Task.ArchiveURL.path)
+        
+        if isSuccessfulSave {
+            os_log("Tasks successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save tasks...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadTasks() -> [Task]? {
+        
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Task.ArchiveURL.path) as? [Task]
+        
+    }
+    
 }

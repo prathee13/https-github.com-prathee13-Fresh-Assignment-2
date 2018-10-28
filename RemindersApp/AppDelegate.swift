@@ -3,7 +3,7 @@
 //  RemindersApp
 //
 //  Created by Pratheeksha Ravindra on 2018-10-19.
-//  Copyright © 2018 Hemanth Kasoju. All rights reserved.
+//  Copyright © 2018. All rights reserved.
 //
 
 import UIKit
